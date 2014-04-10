@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem "bcrypt-ruby"
 gem 'bootstrap_form'
 gem 'nokogiri', '1.3.3'
+gem 'capybara-email'
 
 group :development do
   gem 'sqlite3'
@@ -18,11 +19,13 @@ group :development do
   gem 'thin'
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'letter_opener'
 end
 
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+  gem 'mailgunner', '~> 1.3.0'
 end
 
 group :development, :test do

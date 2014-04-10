@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :reviews
+  has_many :reviews, -> {order('created_at DESC')}
   has_many :queue_items, -> { order('position') } 
   has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   has_secure_password validations: false
 
+  before_create :generate_token
+
   def repositions_queue_items
     queue_items.each_with_index do |queue_item, index|
       queue_item.update(position: index+1)
@@ -19,8 +21,7 @@ class User < ActiveRecord::Base
   end 
 
   def queued_item?(video=nil)
-    collection = queue_items.map(&:video)
-    collection.include?(Video.find(video.id))
+    queue_items.map(&:video).include?(video)
   end
 
   def following?(other_user)
@@ -33,5 +34,9 @@ class User < ActiveRecord::Base
 
   def unfollow!(other_user)
     self.relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  def generate_token
+    self.token = SecureRandom.urlsafe_base64
   end
 end
