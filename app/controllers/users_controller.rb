@@ -19,6 +19,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if params[:token].present?
       guest_user_signs_in_follows_inviter_and_inviter_follows_guest
+      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+      Stripe::Charge.create(
+        :amount => 1000, # in cents
+        :currency => "usd",
+        :card => params[:stripeToken],
+        :description => "Sign up charge for #{@user.email}"
+        )
       AppMailer.delay.notify_on_registration(@user.id)
       session[:user_id] = @user.id
       redirect_to videos_path, notice: "Thank you for signing up"

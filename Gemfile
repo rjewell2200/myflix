@@ -20,6 +20,8 @@ gem 'paratrooper'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
+gem 'stripe'
+gem 'figaro'
 
 group :development do
   gem 'sqlite3'
@@ -40,7 +42,7 @@ end
 group :development, :test do
   gem 'fabrication'
   gem "faker"
-	gem 'rspec-rails'#, '~> 3.0.0.beta'
+  gem 'rspec-rails'#, '~> 3.0.0.beta'
   gem 'pry'
   gem 'launchy', '~> 2.4.2'
 end
