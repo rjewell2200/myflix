@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       guest_user_signs_in_follows_inviter_and_inviter_follows_guest
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       Stripe::Charge.create(
-        :amount => 1000, # in cents
+        :amount => 999, # in cents
         :currency => "usd",
         :card => params[:stripeToken],
         :description => "Sign up charge for #{@user.email}"
