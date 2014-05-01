@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature 'User signs in as a guest' do
-  scenario 'User signs in and invites another user to join MyFLiX' do
+  scenario 'User signs in and invites another user to join MyFLiX', {js: true, vcr: true} do
     comedies = Fabricate(:category, name: 'Comedies')
     futurama = Fabricate(:video, title: 'Futurama', category: comedies, description: "funny show")
     bob = Fabricate(:user)
@@ -30,7 +30,11 @@ feature 'User signs in as a guest' do
     current_email.click_link 'register'
     fill_in "Password", with: "password"
     fill_in "Full Name", with: "Alice Smith"
-    click_on('Create')
+    fill_in "Credit Card Number", with: "4242424242424242"
+    fill_in "Security Code", with: "123"
+    select "7 - July", from: "date_month"
+    select "2015", from: "date_year"
+    click_on('Sign Up')
     expect(page).to have_text("Thank you for signing up")
   end
 
