@@ -17,26 +17,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if params[:token].present?
-      guest_user_signs_in_follows_inviter_and_inviter_follows_guest
+    if @user.save 
+      handles_invitation
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-      Stripe::Charge.create(
-        :amount => 999, # in cents
-        :currency => "usd",
+      StripeWrapper::Charge.create(
+        :amount => 999,
         :card => params[:stripeToken],
         :description => "Sign up charge for #{@user.email}"
         )
-      AppMailer.delay.notify_on_registration(@user.id)
-      session[:user_id] = @user.id
-      redirect_to videos_path, notice: "Thank you for signing up"
-    elsif @user.save
-      Stripe.api_key = ENV['STRIPE_SECRET_KEY']    
-      Stripe::Charge.create(
-        :amount => 1000, # in cents
-        :currency => "usd",
-        :card => params[:stripeToken],
-        :description => "Sign up charge for #{@user.email}"
-        )      
       AppMailer.delay.notify_on_registration(@user.id)
       session[:user_id] = @user.id
       redirect_to videos_path, notice: "Thank you for signing up"
@@ -57,14 +45,13 @@ class UsersController < ApplicationController
 
 private
 
-  def guest_user_signs_in_follows_inviter_and_inviter_follows_guest
-    @user = User.new(user_params.merge!(token_params))
-    invitation = Invitation.where(token: @user.token).first
-    inviter = User.find_by(id: invitation.inviter_id)
-    invitation.update_columns(token: SecureRandom.urlsafe_base64)
-    @user.save
-    @user.follow!(inviter)
-    inviter.follow!(@user)
+  def handles_invitation
+    if params[:token].present?
+      invitation = Invitation.where(token: params[:token]).first
+      @user.follow!(invitation.inviter)
+      invitation.inviter.follow!(@user)
+      invitation.update_columns(token: nil)
+    end
   end
 
   def token_params

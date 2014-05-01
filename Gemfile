@@ -50,5 +50,9 @@ end
 group :test do
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
