@@ -18,18 +18,18 @@ feature 'User signs in as a guest' do
 
   def invite_a_friend
     visit new_invitation_path
-    fill_in "invitation[guest_name]", with: "Alice Smith"
-    fill_in "invitation[guest_email]", with: "alice@example.com"
+    fill_in "invitation[guest_name]", with: "Elena Smith"
+    fill_in "invitation[guest_email]", with: "elena@example.com"
     fill_in "invitation[message]", with: "Please join"
-    click_button 'Send Invitation'
+    click_button "Send Invitation"
     sign_out
   end
 
   def friend_accepts_invitation
-    open_email('alice@example.com')
+    open_email('elena@example.com')
     current_email.click_link 'register'
     fill_in "Password", with: "password"
-    fill_in "Full Name", with: "Alice Smith"
+    fill_in "Full Name", with: "Elena Smith"
     fill_in "Credit Card Number", with: "4242424242424242"
     fill_in "Security Code", with: "123"
     select "7 - July", from: "date_month"

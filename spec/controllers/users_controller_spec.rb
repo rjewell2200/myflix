@@ -112,7 +112,7 @@ describe UsersController do
     context "with valid personal info and declined card" do
       it "does not create a new user record" do
         charge = double(:charge, successful?: false, error_message: "Your card was declined")
-        StripeWrapper::Charge.should_receive(:create).and_return(charge)
+        allow(StripeWrapper::Charge).to receive(:create) {charge}
         post :create, user: Fabricate.attributes_for(:user), stripeToken: '12345'
 
         expect(User.count).to eq(0)
@@ -133,6 +133,9 @@ describe UsersController do
       end
     end
     context "with invalid personal info" do
+
+      around(:each) { ActionMailer::Base.deliveries.clear } 
+      
       before do
         post :create, user: { full_name: "jane" }
       end
