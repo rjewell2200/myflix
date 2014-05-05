@@ -11,7 +11,6 @@ gem 'jquery-rails'
 gem "bcrypt-ruby"
 gem 'bootstrap_form'
 gem 'nokogiri'
-gem 'capybara-email'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
@@ -49,7 +48,9 @@ end
 
 group :test do
   gem 'shoulda-matchers'
-  gem 'capybara'
+  gem 'capybara', '2.1.0'
+  gem 'capybara-email', '2.1.2'
+  gem 'capybara-webkit'
   gem 'vcr'
   gem 'webmock'
   gem 'selenium-webdriver'

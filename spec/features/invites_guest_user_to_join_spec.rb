@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'User signs in as a guest' do
+feature 'User signs in as a guest', {js: true, vcr: true}, driver: :selenium do
   scenario 'User signs in and invites another user to join MyFLiX', {js: true, vcr: true} do
     comedies = Fabricate(:category, name: 'Comedies')
     futurama = Fabricate(:video, title: 'Futurama', category: comedies, description: "funny show")
@@ -47,6 +47,6 @@ feature 'User signs in as a guest' do
   def inviter_should_follow_friend(inviter)
     user_signs_in(inviter)
     click_link "People"
-    expect(page).to have_content "Alice Smith"
+    expect(page).to have_content "Elena Smith"
   end
 end
