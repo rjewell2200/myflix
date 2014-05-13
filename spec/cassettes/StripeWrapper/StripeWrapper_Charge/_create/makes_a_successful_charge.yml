@@ -31,33 +31,33 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 03 May 2014 12:07:09 GMT
+      - Tue, 13 May 2014 18:33:24 GMT
       Content-Type:
       - application/json;charset=utf-8
       Content-Length:
       - '570'
       Access-Control-Allow-Methods:
       - GET, POST, HEAD, OPTIONS, DELETE
-      Cache-Control:
-      - no-cache, no-store
-      Access-Control-Allow-Credentials:
-      - 'true'
       Access-Control-Max-Age:
       - '300'
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Cache-Control:
+      - no-cache, no-store
       Strict-Transport-Security:
       - max-age=31556926; includeSubDomains
     body:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_103xxq28PjG3dl11DLb1IEWv",
+          "id": "tok_1041oL28PjG3dl11vPo1npdg",
           "livemode": false,
-          "created": 1399118829,
+          "created": 1400006004,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_103xxq28PjG3dl117fAOSLRj",
+            "id": "card_1041oL28PjG3dl11xIFSyPjy",
             "object": "card",
             "last4": "4242",
             "type": "Visa",
@@ -76,13 +76,13 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Sat, 03 May 2014 12:07:09 GMT
+  recorded_at: Tue, 13 May 2014 18:33:24 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&card=tok_103xxq28PjG3dl11DLb1IEWv&description=a%20valid%20charge
+      string: amount=999&currency=usd&card=tok_1041oL28PjG3dl11vPo1npdg&description=a%20valid%20charge
     headers:
       Accept:
       - '*/*; q=0.5, application/xml'
@@ -108,35 +108,35 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 03 May 2014 12:07:10 GMT
+      - Tue, 13 May 2014 18:33:25 GMT
       Content-Type:
       - application/json;charset=utf-8
       Content-Length:
       - '1012'
       Access-Control-Allow-Methods:
       - GET, POST, HEAD, OPTIONS, DELETE
-      Access-Control-Max-Age:
-      - '300'
-      Cache-Control:
-      - no-cache, no-store
       Access-Control-Allow-Credentials:
       - 'true'
+      Cache-Control:
+      - no-cache, no-store
+      Access-Control-Max-Age:
+      - '300'
       Strict-Transport-Security:
       - max-age=31556926; includeSubDomains
     body:
       encoding: UTF-8
       string: |
         {
-          "id": "ch_103xxq28PjG3dl11K9RFbyfX",
+          "id": "ch_1041oL28PjG3dl11q37TleKk",
           "object": "charge",
-          "created": 1399118830,
+          "created": 1400006005,
           "livemode": false,
           "paid": true,
           "amount": 999,
           "currency": "usd",
           "refunded": false,
           "card": {
-            "id": "card_103xxq28PjG3dl117fAOSLRj",
+            "id": "card_1041oL28PjG3dl11xIFSyPjy",
             "object": "card",
             "last4": "4242",
             "type": "Visa",
@@ -158,7 +158,7 @@ http_interactions:
           },
           "captured": true,
           "refunds": [],
-          "balance_transaction": "txn_103xxq28PjG3dl117e5bhHtl",
+          "balance_transaction": "txn_1041oL28PjG3dl11iE9Gj2DC",
           "failure_message": null,
           "failure_code": null,
           "amount_refunded": 0,
@@ -170,5 +170,5 @@ http_interactions:
           "statement_description": null
         }
     http_version: 
-  recorded_at: Sat, 03 May 2014 12:07:10 GMT
+  recorded_at: Tue, 13 May 2014 18:33:25 GMT
 recorded_with: VCR 2.9.0

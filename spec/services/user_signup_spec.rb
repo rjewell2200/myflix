@@ -3,10 +3,10 @@ require 'spec_helper'
 describe UserSignup do 
   describe "#sign_up" do
     context "valid personal info and valid card" do
-      let(:charge) { double(:charge, successful?: true)}
+      let(:customer) { double(:customer, successful?: true)}
 
       before do
-        StripeWrapper::Charge.should_receive(:create).and_return(charge)
+        StripeWrapper::Customer.should_receive(:create).and_return(customer)
       end
 
       around(:each) { ActionMailer::Base.deliveries.clear } 
@@ -65,8 +65,8 @@ describe UserSignup do
 
     context "with valid personal info and declined card" do
       it "does not create a new user record" do
-        charge = double(:charge, successful?: false, error_message: "Your card was declined")
-        allow(StripeWrapper::Charge).to receive(:create) {charge}
+        customer = double(:customer, successful?: false, error_message: "Your card was declined")
+        allow(StripeWrapper::Customer).to receive(:create) {customer}
         UserSignup.new(Fabricate.build(:user)).sign_up('12345', nil)
 
         expect(User.count).to eq(0)
@@ -81,7 +81,7 @@ describe UserSignup do
 
       it "does not charge the card" do
         UserSignup.new(User.new(email: "bob@example.com")).sign_up('some_token', nil)
-        StripeWrapper::Charge.should_not_receive(:create)
+        StripeWrapper::Customer.should_not_receive(:create)
       end
 
       it "does not send out an email with invalid inputs" do
