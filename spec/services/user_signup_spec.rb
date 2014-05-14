@@ -3,7 +3,7 @@ require 'spec_helper'
 describe UserSignup do 
   describe "#sign_up" do
     context "valid personal info and valid card" do
-      let(:customer) { double(:customer, successful?: true)}
+      let(:customer) { double(:customer, successful: true)}
 
       before do
         StripeWrapper::Customer.should_receive(:create).and_return(customer)

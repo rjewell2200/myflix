@@ -1,5 +1,6 @@
 class UserSignup
-  attr_reader :error_message
+  attr_reader :error_message, :successful
+  #attr_writer :successful
 
   def initialize(user)
     @user = user  
@@ -16,6 +17,7 @@ class UserSignup
         handles_invitation(invitation_token)
         AppMailer.delay.notify_on_registration(@user.id)
         @status = :success
+        @successful = customer.successful?
         self
       else
         @status = :failed
@@ -29,9 +31,9 @@ class UserSignup
     end
   end
 
-  def successful?
-    @status == :success
-  end
+  #def successful?
+  #  @status == :success
+  #end
 
 private
 
