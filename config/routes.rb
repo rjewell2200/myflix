@@ -40,4 +40,6 @@ Myflix::Application.routes.draw do
   get 'expired_token', to: 'reset_passwords#expired_token'
 
   resources :invitations, only: [:new, :create]
+
+  mount StripeEvent::Engine => '/stripe_events'
 end

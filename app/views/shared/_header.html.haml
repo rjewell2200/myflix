@@ -18,9 +18,11 @@
             %b.caret
           %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
             %li
-              %a(href="#") Account
-              %a(href="#") Plan and Billing
+              - if !current_user.admin
+                %a(href="#") Account
+                %a(href="#") Plan and Billing
               = link_to "Profile", user_path(current_user.id)
               = link_to "Log Out", log_out_path
               = link_to "Invite Friends", new_invitation_path
               = link_to "Add a Video", new_admin_video_path if current_user.admin
+              = link_to "View Payments", new_admin_video_path if current_user.admin
