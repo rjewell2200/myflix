@@ -51,5 +51,13 @@ module StripeWrapper
     def successful?
       response.present?
     end
+
+    def customer_token
+      response.id
+      #response[:id][:data]
+      #data_array = response[:subscriptions][:data]
+      #data_hash = data_array[0]
+      #data_hash[:customer]
+    end
   end
 end
