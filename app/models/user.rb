@@ -39,4 +39,8 @@ class User < ActiveRecord::Base
   def generate_token
     self.token = SecureRandom.urlsafe_base64
   end
+
+  def deactivate!
+    self.update_columns(active: false)
+  end
 end

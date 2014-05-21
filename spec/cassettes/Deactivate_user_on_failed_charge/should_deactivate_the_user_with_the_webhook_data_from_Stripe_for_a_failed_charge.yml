@@ -1,0 +1,106 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/events/evt_1044js28PjG3dl110LC1Ml5D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.11.0
+      Authorization:
+      - Bearer sk_test_u4QITAafMYa7RMbWbWjnA7VA
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.11.0","lang":"ruby","lang_version":"2.0.0 p247 (2013-06-27)","platform":"x86_64-darwin13.0.0","publisher":"stripe","uname":"Darwin
+        Roberts-MacBook-Pro.local 13.1.0 Darwin Kernel Version 13.1.0: Thu Jan 16
+        19:40:37 PST 2014; root:xnu-2422.90.20~2/RELEASE_X86_64 x86_64"}'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 21 May 2014 14:32:30 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '1449'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '300'
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Cache-Control:
+      - no-cache, no-store
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "evt_1044js28PjG3dl110LC1Ml5D",
+          "created": 1400681318,
+          "livemode": false,
+          "type": "charge.failed",
+          "data": {
+            "object": {
+              "id": "ch_1044js28PjG3dl118AwmDdOo",
+              "object": "charge",
+              "created": 1400681318,
+              "livemode": false,
+              "paid": false,
+              "amount": 999,
+              "currency": "usd",
+              "refunded": false,
+              "card": {
+                "id": "card_1044jp28PjG3dl11WgFUqrea",
+                "object": "card",
+                "last4": "0341",
+                "type": "Visa",
+                "exp_month": 5,
+                "exp_year": 2018,
+                "fingerprint": "EovdprEDsRA6jCCW",
+                "country": "US",
+                "name": null,
+                "address_line1": null,
+                "address_line2": null,
+                "address_city": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_country": null,
+                "cvc_check": "pass",
+                "address_line1_check": null,
+                "address_zip_check": null,
+                "customer": "cus_44PyXoUGySL8xo"
+              },
+              "captured": false,
+              "refunds": [],
+              "balance_transaction": null,
+              "failure_message": "Your card was declined.",
+              "failure_code": "card_declined",
+              "amount_refunded": 0,
+              "customer": "cus_44PyXoUGySL8xo",
+              "invoice": null,
+              "description": "payment to fail",
+              "dispute": null,
+              "metadata": {},
+              "statement_description": null
+            }
+          },
+          "object": "event",
+          "pending_webhooks": 1,
+          "request": "iar_44js6RhmoRpCQa"
+        }
+    http_version: 
+  recorded_at: Wed, 21 May 2014 14:32:30 GMT
+recorded_with: VCR 2.9.0

@@ -82,6 +82,11 @@ describe UserSignup do
     end
 
     context "with invalid personal info" do
+
+      after do
+        ActionMailer::Base.deliveries.clear
+      end
+      
       it "does not create a record when input is invalid " do
         UserSignup.new(User.new(email: "bob@example.com")).sign_up('some_token', nil)
         expect(User.count).to eq(0)
